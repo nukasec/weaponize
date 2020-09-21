@@ -5,7 +5,7 @@ sudo apt-get -y upgrade
 sudo apt-get install -y libcurl4-openssl-dev libssl-dev jq ruby-full libcurl4-openssl-dev \
 	libxml2 libxml2-dev libxslt1-dev ruby-dev build-essential libgmp-dev zlib1g-dev \
 	build-essential libssl-dev libffi-dev python-dev python-setuptools libldns-dev \
-	python3-pip python-pip-whl python-dnspython git rename
+	python3-pip python-pip-whl python-dnspython git rename whois nikto masscan dig
 
 echo -e "\nSetting up your .bash_profile based on weapon_profile"
 cat weapon_profile >> ~/.bash_profile
@@ -40,6 +40,9 @@ cd ~/tools
 
 echo -e "\nInstalling Chromium."
 sudo snap install chromium
+
+echo -e "\nInstalling Amass."
+sudo snap install amass
 
 echo -e "\nInstalling Aquatone"
 go get github.com/michenriksen/aquatone
@@ -117,6 +120,29 @@ echo -e "\nInstalling crtndstry"
 git clone https://github.com/nahamsec/crtndstry.git
 echo "crtndstry finished."
 
+echo -e "\nInstalling CRLF Injection Scanner"
+git clone https://github.com/random-robbie/CRLF-Injection-Scanner.git
+cd CRLF-Injection-Scanner
+pip install colored eventlet
+cd ~/tools
+
+echo -e "\nInstalling SubBrute"
+git clone https://github.com/TheRook/subbrute.git
+cd ~/tools
+
+echo -e "\nInstalling S3 Bucket Checker"
+mkdir s3-bucket-check
+cd s3-bucket-check
+wget https://gist.githubusercontent.com/random-robbie/b452cc3e1aa99cfeba764e70b5a26dc8/raw/bucket_upload.sh
+wget https://gist.githubusercontent.com/random-robbie/b0c8603e55e22b21c49fd80072392873/raw//bucket_list.sh
+cd ~/tools
+
+echo -e "\nInstalling FFuF"
+git clone https://github.com/ffuf/ffuf
+cd ffuf
+go build
+cd ~/tools
+
 echo -e "\nDownloading Seclists"
 cd ~/tools/
 git clone https://github.com/danielmiessler/SecLists.git
@@ -127,5 +153,6 @@ cd ~/tools/
 echo "SecLists finished."
 
 echo -e "\n\n\n*** Nice! You're outfitted. All your goods are located in ~/tools ***\n"
+echo -e "\n[!] DONT FORGET: Populate amass with your API keys, set up github globals, check ufw, etc.."
 
 ls -la
