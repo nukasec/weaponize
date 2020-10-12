@@ -6,7 +6,7 @@ sudo apt-get install -y libcurl4-openssl-dev libssl-dev jq ruby-full libcurl4-op
 	libxml2 libxml2-dev libxslt1-dev ruby-dev build-essential libgmp-dev zlib1g-dev \
 	build-essential libssl-dev libffi-dev python-dev python-setuptools libldns-dev \
 	python3-pip python-pip-whl python-dnspython git rename whois nikto masscan dig \
-	ufw, tmux, tor, ctags
+	ufw, tmux, tor, ctags, screenfetch
 
 echo -e "\nSetting up your .bash_profile."
 cat bash_profile_new >> ~/.bash_profile
