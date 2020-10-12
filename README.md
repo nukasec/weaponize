@@ -1,4 +1,3 @@
-## Outfitting script for new Ubuntu 20.04 VPS's
-### Based off of NahamSec's bbht
+## Outfitting script for new Ubuntu 20.04 VPS
 
 ```chmod +x weaponize.sh && sudo ./weaponize.sh```

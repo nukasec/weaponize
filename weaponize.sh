@@ -5,11 +5,21 @@ sudo apt-get -y upgrade
 sudo apt-get install -y libcurl4-openssl-dev libssl-dev jq ruby-full libcurl4-openssl-dev \
 	libxml2 libxml2-dev libxslt1-dev ruby-dev build-essential libgmp-dev zlib1g-dev \
 	build-essential libssl-dev libffi-dev python-dev python-setuptools libldns-dev \
-	python3-pip python-pip-whl python-dnspython git rename whois nikto masscan dig
+	python3-pip python-pip-whl python-dnspython git rename whois nikto masscan dig \
+	ufw, tmux, tor, ctags
 
-echo -e "\nSetting up your .bash_profile based on weapon_profile"
-cat weapon_profile >> ~/.bash_profile
+echo -e "\nSetting up your .bash_profile."
+cat bash_profile_new >> ~/.bash_profile
 source ~/.bash_profile
+
+echo -e "\nGetting pretty colors and vimrc"
+cat vimcfg > ~/.vimrc
+cat xresources >> ~/.Xresources
+xrdb -load ~/.Xresources
+
+echo -e "\nEnabling ufw"
+sudo ufw default deny
+sudo ufw enable
 
 echo -e "\nSetting up GitHub global variables"
 echo "Github Username: "
@@ -47,15 +57,6 @@ sudo snap install amass
 echo -e "\nInstalling Aquatone"
 go get github.com/michenriksen/aquatone
 echo "Aquatone finished."
-
-<<FAIL
-echo "installing JSParser"
-git clone https://github.com/nahamsec/JSParser.git
-cd JSParser*
-sudo python setup.py install
-cd ~/tools/
-echo "done"
-FAIL
 
 echo "installing Sublist3r"
 git clone https://github.com/aboul3la/Sublist3r.git
@@ -152,7 +153,13 @@ cat dns-Jhaddix.txt | head -n -14 > clean-jhaddix-dns.txt
 cd ~/tools/
 echo "SecLists finished."
 
-echo -e "\n\n\n*** Nice! You're outfitted. All your goods are located in ~/tools ***\n"
-echo -e "\n[!] DONT FORGET: Populate amass with your API keys, set up github globals, check ufw, etc.."
+echo -e "\nCreating custom MOTD"
+sudo chmod -x /etc/update-motd.d/*
+sudo mv 01-custom-motd /etc/update-motd.d/
+sudo chmod +x /etc/update-motd.d/01-custom-mod
+
+clear
+echo -e "\n\n [*] Nice! You're outfitted. Everything is located in ~/tools"
+echo -e "\n [!] DONT FORGET: Populate your API keys (eg. amass)\n"
 
 ls -la
