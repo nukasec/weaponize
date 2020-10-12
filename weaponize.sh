@@ -4,9 +4,9 @@ sudo apt-get -y upgrade
 
 sudo apt-get install -y libcurl4-openssl-dev libssl-dev jq ruby-full libcurl4-openssl-dev \
 	libxml2 libxml2-dev libxslt1-dev ruby-dev build-essential libgmp-dev zlib1g-dev \
-	build-essential libssl-dev libffi-dev python-dev python-setuptools libldns-dev \
-	python3-pip python-pip-whl python-dnspython git rename whois nikto masscan dig \
-	ufw, tmux, tor, ctags, screenfetch
+	build-essential libssl-dev libffi-dev python-dev-is-python2 python-setuptools libldns-dev \
+	python2 python3-pip python-pip-whl python-dnspython rename whois nikto masscan dig \
+	tmux tor screenfetch make ruby
 
 echo -e "\nSetting up your .bash_profile."
 cat bash_profile_new >> ~/.bash_profile
@@ -15,19 +15,11 @@ source ~/.bash_profile
 echo -e "\nGetting pretty colors and vimrc"
 cat vimcfg > ~/.vimrc
 cat xresources >> ~/.Xresources
-xrdb -load ~/.Xresources
 
 echo -e "\nEnabling ufw"
 sudo ufw default deny
+sudo ufw allow 22
 sudo ufw enable
-
-echo -e "\nSetting up GitHub global variables"
-echo "Github Username: "
-read GHuser
-echo "Github Email: "
-read GHemail
-git --config --global user.name "$GHuser"
-git --config --global user.email $GHemail
 
 echo -e "\nFetching python2 pip"
 wget https://bootstrap.pypa.io/get-pip.py
